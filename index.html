@@ -8,13 +8,20 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Pacifico&display=swap');
         
-        body {
+        html, body {
             font-family: 'Montserrat', sans-serif;
             background: linear-gradient(135deg, #f9f4ff 0%, #e6d7f2 100%);
             min-height: 100vh;
             margin: 0;
-            padding: 20px 0;
+            padding: 0;
+        }
+        
+        .page-container {
+            padding: 20px;
+            padding-bottom: 100px;
+            min-height: 100vh;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
         }
@@ -24,9 +31,11 @@
             border-radius: 20px;
             box-shadow: 0 10px 30px rgba(138, 43, 226, 0.2);
             position: relative;
-            overflow: hidden;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             margin-bottom: 40px;
+            width: 90%;
+            max-width: 500px;
+            padding: 24px;
         }
         
         .card:hover {
@@ -41,6 +50,9 @@
             background-clip: text;
             color: transparent;
             text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.5);
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 1.5rem;
         }
         
         .balloon {
@@ -50,6 +62,7 @@
             opacity: 0;
             animation: float 15s infinite ease-in-out;
             pointer-events: none;
+            z-index: -1;
         }
         
         @keyframes float {
@@ -76,6 +89,7 @@
             opacity: 0;
             animation: confettiFall 6s ease-in-out forwards;
             pointer-events: none;
+            z-index: 10;
         }
         
         @keyframes confettiFall {
@@ -93,6 +107,13 @@
             background: linear-gradient(135deg, #9370DB, #8A2BE2);
             color: white;
             transition: all 0.3s ease;
+            padding: 0.75rem 1.5rem;
+            border-radius: 9999px;
+            font-weight: bold;
+            font-size: 1.125rem;
+            display: inline-block;
+            margin-top: 1rem;
+            text-align: center;
         }
         
         .btn-purple:hover {
@@ -103,6 +124,9 @@
         .message {
             display: none;
             animation: fadeIn 1s ease-in-out;
+            text-align: center;
+            color: #4a5568;
+            margin-bottom: 2rem;
         }
         
         @keyframes fadeIn {
@@ -113,7 +137,6 @@
         .heart {
             position: fixed;
             font-size: 20px;
-            color: #9370DB;
             opacity: 0;
             z-index: 100;
             animation: heartFloat 4s ease-in-out forwards;
@@ -147,86 +170,114 @@
             z-index: 1000;
         }
         
+        .cake-container {
+            text-align: center;
+            margin-bottom: 2rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .cake-svg {
+            width: 150px;
+            height: 150px;
+            display: block;
+            margin: 0 auto;
+        }
+        
+        .buttons-container {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+        }
+        
+        .buttons-container button {
+            margin: 0.5rem 0;
+            width: 100%;
+            max-width: 250px;
+        }
+        
         /* Мобильные стили */
         @media (max-width: 640px) {
-            .card {
-                padding: 16px !important;
-            }
-            
             .card-header {
-                font-size: 2rem !important;
+                font-size: 2rem;
             }
             
-            .buttons-container {
-                display: flex;
-                flex-direction: column;
-                align-items: center;
+            .card {
+                padding: 16px;
             }
             
-            .buttons-container button {
-                margin: 8px 0;
-                width: 100%;
-                max-width: 250px;
+            .cake-svg {
+                width: 120px;
+                height: 120px;
             }
         }
     </style>
 </head>
-<body class="bg-purple-50">
-    <div id="balloons-container"></div>
-    <div id="confetti-container"></div>
-    <div id="hearts-container"></div>
-    
-    <div class="card w-11/12 max-w-lg p-8 mx-auto">
-        <h1 class="card-header text-4xl md:text-5xl text-center mb-6">С Днем Рождения, Анна!</h1>
+<body>
+    <div class="page-container">
+        <div id="balloons-container"></div>
+        <div id="confetti-container"></div>
+        <div id="hearts-container"></div>
         
-        <div class="text-center mb-8">
-            <svg class="mx-auto" width="150" height="150" viewBox="0 0 200 200">
-                <g id="cake">
-                    <rect x="40" y="100" width="120" height="60" rx="5" fill="#f8f3ff" stroke="#9370DB" stroke-width="3"/>
-                    <rect x="50" y="70" width="100" height="30" rx="5" fill="#f8f3ff" stroke="#9370DB" stroke-width="3"/>
-                    <rect x="70" y="40" width="60" height="30" rx="5" fill="#f8f3ff" stroke="#9370DB" stroke-width="3"/>
-                    <circle cx="100" cy="30" r="10" fill="#FF69B4"/>
-                    <rect x="98" y="10" width="4" height="20" fill="#8A2BE2"/>
-                    <circle cx="70" cy="55" r="5" fill="#9370DB"/>
-                    <circle cx="100" cy="55" r="5" fill="#9370DB"/>
-                    <circle cx="130" cy="55" r="5" fill="#9370DB"/>
-                    <circle cx="60" cy="85" r="5" fill="#9370DB"/>
-                    <circle cx="90" cy="85" r="5" fill="#9370DB"/>
-                    <circle cx="120" cy="85" r="5" fill="#9370DB"/>
-                    <circle cx="140" cy="85" r="5" fill="#9370DB"/>
-                </g>
-            </svg>
-        </div>
-        
-        <div id="initial-message" class="text-center text-gray-700 mb-8">
-            <p class="text-lg mb-4">Нажми на кнопку, чтобы увидеть поздравление!</p>
-        </div>
-        
-        <div id="birthday-message" class="message text-center text-gray-700 mb-8">
-            <p class="text-lg mb-4">Дорогая Анна!</p>
-            <p class="mb-4">Поздравляю тебя с днем рождения! Каждый день, проведенный рядом с тобой, наполнен позитивом и вдохновением.</p>
-            <p class="mb-4">Твоя энергия, искренность и доброта делают этот мир прекраснее. Желаю тебе счастья, успехов во всех начинаниях и чтобы каждый день приносил радость и новые открытия!</p>
-            <p class="font-semibold">С теплыми пожеланиями, Вадим</p>
-        </div>
-        
-        <div class="text-center buttons-container">
-            <button id="show-message" class="btn-purple px-6 py-3 rounded-full font-bold text-lg">
-                Открыть поздравление
-            </button>
+        <div class="card">
+            <h1 class="card-header">С Днем Рождения, Анна!</h1>
             
-            <button id="send-hearts" class="btn-purple px-6 py-3 rounded-full font-bold text-lg mt-4 hidden">
-                Отправить любовь ❤️
-            </button>
+            <div class="cake-container">
+                <svg class="cake-svg" width="150" height="150" viewBox="0 0 200 200">
+                    <g id="cake" transform="translate(0,0)">
+                        <rect x="40" y="100" width="120" height="60" rx="5" fill="#f8f3ff" stroke="#9370DB" stroke-width="3"/>
+                        <rect x="50" y="70" width="100" height="30" rx="5" fill="#f8f3ff" stroke="#9370DB" stroke-width="3"/>
+                        <rect x="70" y="40" width="60" height="30" rx="5" fill="#f8f3ff" stroke="#9370DB" stroke-width="3"/>
+                        <circle cx="100" cy="30" r="10" fill="#FF69B4"/>
+                        <rect x="98" y="10" width="4" height="20" fill="#8A2BE2"/>
+                        <circle cx="70" cy="55" r="5" fill="#9370DB"/>
+                        <circle cx="100" cy="55" r="5" fill="#9370DB"/>
+                        <circle cx="130" cy="55" r="5" fill="#9370DB"/>
+                        <circle cx="60" cy="85" r="5" fill="#9370DB"/>
+                        <circle cx="90" cy="85" r="5" fill="#9370DB"/>
+                        <circle cx="120" cy="85" r="5" fill="#9370DB"/>
+                        <circle cx="140" cy="85" r="5" fill="#9370DB"/>
+                    </g>
+                </svg>
+            </div>
+            
+            <div id="initial-message" class="message" style="display: block;">
+                <p class="text-lg mb-4">Нажми на кнопку, чтобы увидеть поздравление!</p>
+            </div>
+            
+            <div id="birthday-message" class="message">
+                <p class="text-lg mb-4">Дорогая Анна!</p>
+                <p class="mb-4">Поздравляю тебя с днем рождения! Каждый день, проведенный рядом с тобой, наполнен позитивом и вдохновением.</p>
+                <p class="mb-4">Твоя энергия, искренность и доброта делают этот мир прекраснее. Желаю тебе счастья, успехов во всех начинаниях и чтобы каждый день приносил радость и новые открытия!</p>
+                <p class="font-semibold">С теплыми пожеланиями, Вадим</p>
+            </div>
+            
+            <div class="buttons-container">
+                <button id="show-message" class="btn-purple">
+                    Открыть поздравление
+                </button>
+                
+                <button id="send-hearts" class="btn-purple" style="display: none;">
+                    Отправить любовь ❤️
+                </button>
+            </div>
         </div>
     </div>
 
     <script>
-        // Создание воздушных шаров
+        // Определяем, является ли устройство мобильным
+        const isMobile = window.innerWidth <= 768;
+        
+        // Создание воздушных шаров (меньше для мобильных)
         function createBalloons() {
             const colors = ['#9370DB', '#8A2BE2', '#ffffff', '#e6d7f2'];
             const container = document.getElementById('balloons-container');
+            const balloonCount = isMobile ? 8 : 15;
             
-            for (let i = 0; i < 15; i++) {
+            for (let i = 0; i < balloonCount; i++) {
                 const balloon = document.createElement('div');
                 balloon.className = 'balloon';
                 
@@ -248,13 +299,15 @@
             }
         }
         
-        // Создание конфетти
+        // Создание конфетти (меньше для мобильных)
         function createConfetti() {
             const colors = ['#9370DB', '#8A2BE2', '#ffffff', '#e6d7f2', '#FFD700'];
             const container = document.getElementById('confetti-container');
             container.innerHTML = '';
             
-            for (let i = 0; i < 100; i++) {
+            const confettiCount = isMobile ? 50 : 100;
+            
+            for (let i = 0; i < confettiCount; i++) {
                 const confetti = document.createElement('div');
                 confetti.className = 'confetti';
                 
@@ -275,14 +328,15 @@
             }
         }
         
-        // Создание сердечек по всему экрану
+        // Создание сердечек по всему экрану (меньше для мобильных)
         function createHearts() {
             const container = document.getElementById('hearts-container');
             container.innerHTML = '';
             
             const heartTypes = ['❤️', '💜', '💖', '💕', '💓', '💗', '💘'];
+            const heartCount = isMobile ? 50 : 100;
             
-            for (let i = 0; i < 100; i++) {
+            for (let i = 0; i < heartCount; i++) {
                 const heart = document.createElement('div');
                 heart.className = 'heart';
                 
@@ -323,23 +377,21 @@
                 initialMessage.style.display = 'none';
                 birthdayMessage.style.display = 'block';
                 showMessageBtn.style.display = 'none';
-                sendHeartsBtn.style.display = 'inline-block';
+                sendHeartsBtn.style.display = 'block';
                 createConfetti();
                 
-                // Прокрутка к кнопке на мобильных устройствах
-                if (window.innerWidth <= 640) {
-                    setTimeout(() => {
-                        sendHeartsBtn.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                    }, 300);
-                }
+                // Убедимся, что кнопка "Отправить любовь" видна
+                setTimeout(() => {
+                    sendHeartsBtn.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }, 300);
             });
             
             sendHeartsBtn.addEventListener('click', function() {
                 createHearts();
                 // Добавляем эффект нажатия кнопки
-                sendHeartsBtn.classList.add('scale-95');
+                sendHeartsBtn.style.transform = 'scale(0.95)';
                 setTimeout(() => {
-                    sendHeartsBtn.classList.remove('scale-95');
+                    sendHeartsBtn.style.transform = '';
                 }, 200);
             });
             
@@ -348,11 +400,11 @@
             cake.addEventListener('click', function() {
                 cake.style.transform = 'scale(1.1)';
                 setTimeout(() => {
-                    cake.style.transform = 'scale(1)';
+                    cake.style.transform = '';
                 }, 300);
                 createConfetti();
             });
         });
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'966df63a777dfeac',t:'MTc1MzgwNjIxNy4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'966dfe8604b4131e',t:'MTc1MzgwNjU1Ny4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
